@@ -33,20 +33,15 @@ const getAllPosts = router.get("/post", authUser, async (req, res) => {
 // get post for all users
 const getAllPostsForAllUsers = router.get("/all-posts", async (req, res) => {
   try {
-    const allPosts = await BlogPost.find().populate("comments");
 
-    //In Mongoose, the populate() method is used to replace specified paths in 
-    // a document with document(s) from other collection(s). 
-    // It allows you to reference documents in other collections and pull in the 
-    // referenced data when querying.
 
-    // In your case, when you have a field like comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }] 
-    // in your BlogPost schema, it means that the comments field is an array of ObjectIds referencing documents 
-    // in the Comment collection.
+    const allPosts = await BlogPost.find({});
+    allPosts.map( async (value, index)=>{
+        const test = await value.populate("comments");
+        console.log(test)
 
-    // When you use populate('comments') in a query, Mongoose will replace the 
-    // ObjectIds in the comments array with the actual Comment documents from the
-    //  Comment collection. This is useful when you want to retrieve related documents and have a more complete view of the data.
+    })
+   
 
     res.status(200).json(allPosts);
   } catch (error) {

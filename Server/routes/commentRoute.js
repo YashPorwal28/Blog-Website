@@ -11,11 +11,10 @@ const addComment = router.post('/post/:postId', authUser, async (req, res) => {
         const text = req.body.text;
         const commentUserId = req.user.userId;
 
-        const post = await BlogPost.findById(postId).populate('comments'); // Use populate to retrieve comments
+        const post = await BlogPost.findById(postId).populate("comments"); // Use populate to retrieve comments
 
-        if (!post.comments) {
-            post.comments = [];
-        }
+        console.log(post.populate('comments'))
+  
 
         // Create a new comment
         const newComment = new Comment({

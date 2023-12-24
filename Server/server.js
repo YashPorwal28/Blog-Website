@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const { connectToDatabase } = require('./utils/connection');
 const { createPost , getAllPosts ,deletePost ,getAllPostsForAllUsers} = require('./routes/blogPostRoute');
 const { addComment } = require('./routes/commentRoute');
+const { addLike, removeLike } = require('./routes/likesRoute');
 
 app.use(bodyParser.json());
 connectToDatabase();
@@ -20,6 +21,8 @@ app.use('/api',getAllPosts);
 app.use('/api',getAllPostsForAllUsers);
 app.use('/api',deletePost);
 app.use('/api',addComment)
+app.use('/api',addLike)
+app.use('/api',removeLike)
 
 
 
