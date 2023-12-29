@@ -49,11 +49,17 @@ const signin = router.post('/signin', async(req,res)=>{
 
         const token = jwt.sign({
             userId : existingUser.id , username: existingUser.username
-        },jwtSecret,{expiresIn:'1h'})
+        },jwtSecret)
+
+        // set token as a cookie in response
+        res.cookie('token',token,{
+            // https only to tell browsers not allows Client side scripting 
+            httpOnly : true,
+            maxAge: 86400000
+        })        
 
 
-
-        res.status(200).json({user :existingUser ,message: "Signin successfull", token})
+        res.status(200).json({user :existingUser ,message: "Signin successfull"})
 
     }catch(error){
 

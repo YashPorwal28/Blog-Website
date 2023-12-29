@@ -4,7 +4,7 @@ const authUser = require("../Authentication/authUser");
 const BlogPost = require("../models/schema/blogPostSchema");
 
 
-// adding likes
+// adding likes to a post
 const addLike = router.post('/post/:postId/like', authUser , async (req,res)=>{
 
     try{

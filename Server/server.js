@@ -3,11 +3,13 @@ const express = require('express');
 const app = express()
 const {signup,signin} = require('./routes/userRoute')
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser')
 const { connectToDatabase } = require('./utils/connection');
 const { createPost , getAllPosts ,deletePost ,getAllPostsForAllUsers} = require('./routes/blogPostRoute');
 const { addComment } = require('./routes/commentRoute');
 const { addLike, removeLike } = require('./routes/likesRoute');
 
+app.use(cookieParser());
 app.use(bodyParser.json());
 connectToDatabase();
 

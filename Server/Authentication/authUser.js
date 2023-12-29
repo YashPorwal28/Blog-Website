@@ -2,9 +2,15 @@ const jwt = require('jsonwebtoken')
 const jwtSecret = process.env.JWT_SECRET
 
 const authUser = (req,res,next)=>{
+
+    // console.log(req.cookies.token);
+
+    const token = req.cookies.token;
+
+
     // get token from the header to accumulate useful information
-    const token = req.header('Authorization')
-    // if token not found
+
+    // // if token not found
     if(!token){
         res.status(401).json({error: "Unauthorized or missing token"});
     }
